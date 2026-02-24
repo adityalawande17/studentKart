@@ -11,7 +11,10 @@ const Admin = () => {
     category: "college",
     link: "",
   });
-
+  const [loading, setLoading] = useState(false);
+  const [deleteLoadingId, setDeleteLoadingId] = useState(null);
+  const [message, setMessage] = useState(null);
+  const [error, setError] = useState(null);
   const [materials, setMaterials] = useState([]);
 
   useEffect(() => {
@@ -24,33 +27,67 @@ const Admin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await addMaterial(form);
 
-    if (res._id) {
-      alert("Material added successfully");
-      setForm({
-        title: "",
-        year: "SE",
-        subject: "",
-        category: "college",
-        link: "",
-      });
-      setMaterials([res, ...materials]);
-    } else {
-      alert(res.message || "Error adding material");
+    try {
+      setLoading(true);
+      setError(null);
+      setMessage(null);
+
+      const res = await addMaterial(form);
+
+      if (res._id) {
+        setMaterials([res, ...materials]);
+        setForm({
+          title: "",
+          year: "SE",
+          subject: "",
+          category: "college",
+          link: "",
+        });
+        setMessage("Material added successfully!");
+      } else {
+        setError(res.message || "Error adding material.");
+      }
+    } catch (err) {
+      setError("Something went wrong.");
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleDelete = async (id) => {
-    const res = await deleteMaterial(id);
-    if (res.message === "Material deleted") {
-      setMaterials(materials.filter((m) => m._id !== id));
+    try {
+      setDeleteLoadingId(id);
+      setError(null);
+      setMessage(null);
+
+      const res = await deleteMaterial(id);
+
+      if (res.message === "Material deleted") {
+        setMaterials(materials.filter((m) => m._id !== id));
+        setMessage("Material deleted successfully.");
+      } else {
+        setError("Failed to delete material.");
+      }
+    } catch (err) {
+      setError("Something went wrong.");
+    } finally {
+      setDeleteLoadingId(null);
     }
   };
 
   return (
     <PageWrapper>
       <h1 className="text-3xl font-bold mb-8">Admin Panel</h1>
+      {message && (
+        <div className="mb-4 p-3 bg-green-100 text-green-700 rounded">
+          {message}
+        </div>
+      )}
+
+      {error && (
+        <div className="mb-4 p-3 bg-red-100 text-red-700 rounded">{error}</div>
+      )}
 
       {/* Add Material Form */}
       <div className="bg-white rounded-lg shadow p-6 mb-10">
@@ -109,9 +146,14 @@ const Admin = () => {
 
           <button
             type="submit"
-            className="sm:col-span-2 bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+            disabled={loading}
+            className={`sm:col-span-2 py-2 rounded text-white ${
+              loading
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-blue-600 hover:bg-blue-700"
+            }`}
           >
-            Add Material
+            {loading ? "Adding..." : "Add Material"}
           </button>
         </form>
       </div>
@@ -134,9 +176,14 @@ const Admin = () => {
 
             <button
               onClick={() => handleDelete(item._id)}
-              className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+              disabled={deleteLoadingId === item._id}
+              className={`px-4 py-2 rounded text-white ${
+                deleteLoadingId === item._id
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-red-500 hover:bg-red-600"
+              }`}
             >
-              Delete
+              {deleteLoadingId === item._id ? "Deleting..." : "Delete"}
             </button>
           </div>
         ))}

@@ -65,7 +65,7 @@ const Materials = () => {
       </div>
 
       {/* Subject Filter */}
-      {year && (
+      {year && !loading && !error && (
         <div className="mb-8">
           <h2 className="text-lg font-semibold mb-3">Select Subject</h2>
           <div className="flex flex-wrap gap-3">
