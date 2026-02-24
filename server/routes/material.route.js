@@ -1,38 +1,17 @@
 import express from "express";
-import Material from "../models/material.model.js";
+import {
+  getMaterials,
+  createMaterial,
+  updateMaterial,
+  deleteMaterial,
+} from "../controllers/materialController.js";
 import { protect, adminOnly } from "../middlewares/auth.middleware.js";
 
 const router = express.Router();
 
-//POST - to add material
-
-router.post("/", protect, adminOnly, async (req, res) => {
-  try {
-    const material = await Material.create(req.body);
-    res.status(200).json(material);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-});
-
-//GET
-
-router.get("/", async (req, res) => {
-  try {
-    const materials = await Material.find(req.query);
-    res.status(200).json(materials);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
-
-router.delete("/:id", protect, adminOnly, async (req, res) => {
-  try {
-    await Material.findByIdAndDelete(req.params.id);
-    res.json({ message: "Material deleted" });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
+router.get("/", getMaterials);
+router.post("/", protect, adminOnly, createMaterial);
+router.put("/:id", protect, adminOnly, updateMaterial);
+router.delete("/:id", protect, adminOnly, deleteMaterial);
 
 export default router;
