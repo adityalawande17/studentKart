@@ -50,3 +50,18 @@ export const deleteMaterial = async (id) => {
   });
   return res.json();
 };
+
+export const updateMaterial = async (id, updatedData) => {
+  const res = await fetch(`${BASE_URL}/materials/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+    body: JSON.stringify(updatedData),
+  });
+
+  if (!res.ok) throw new Error("Update failed");
+
+  return res.json();
+};
