@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import PageWrapper from "../components/PageWrapper.jsx";
 
 const Admin = () => {
-  const navigate = useNavigate();
 
   const [form, setForm] = useState({
     title: "",
