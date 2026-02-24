@@ -5,7 +5,6 @@ import {
   getMaterials,
   updateMaterial,
 } from "../services/api.js";
-import { useNavigate } from "react-router-dom";
 import PageWrapper from "../components/PageWrapper.jsx";
 
 const Admin = () => {
