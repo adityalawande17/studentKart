@@ -1,74 +1,144 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getMaterials } from "../services/api.js";
+import PageWrapper from "../components/PageWrapper.jsx";
 
 const Materials = () => {
   const { year, subject } = useParams();
   const navigate = useNavigate();
   const [materials, setMaterials] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    getMaterials(year, subject).then((data) => {
-      setMaterials(data);
-    });
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        const data = await getMaterials(year, subject);
+        setMaterials(data);
+      } catch (err) {
+        setError("Failed to load materials. Please try again.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
   }, [year, subject]);
 
   const uniqueSubjects = [...new Set(materials.map((m) => m.subject))];
 
   return (
-    <div>
-      <h2>Materials</h2>
+    <PageWrapper>
+      {/* Page Title */}
+      <h1 className="text-3xl font-bold mb-6">College Materials</h1>
 
-      <select
-        value={year || ""}
-        onChange={(e) => {
-          const selectedYear = e.target.value;
-          if (selectedYear) {
-            navigate(`/materials/${selectedYear}`);
-          } else {
-            navigate("/materials");
-          }
-        }}
-      >
-        <option value="">All Years</option>
-        <option value="FE">FE</option>
-        <option value="SE">SE</option>
-        <option value="TE">TE</option>
-        <option value="BE">BE</option>
-      </select>
+      {/* Year Filter */}
+      <div className="flex flex-wrap items-center gap-4 mb-6">
+        <select
+          value={year || ""}
+          onChange={(e) => {
+            const selectedYear = e.target.value;
+            selectedYear
+              ? navigate(`/materials/${selectedYear}`)
+              : navigate("/materials");
+          }}
+          className="px-4 py-2 border rounded-md"
+        >
+          <option value="">All Years</option>
+          <option value="FE">FE</option>
+          <option value="SE">SE</option>
+          <option value="TE">TE</option>
+          <option value="BE">BE</option>
+        </select>
 
+        {(year || subject) && (
+          <button
+            onClick={() => navigate("/materials")}
+            className="px-4 py-2 rounded bg-gray-200 hover:bg-gray-300"
+          >
+            Reset
+          </button>
+        )}
+      </div>
+
+      {/* Subject Filter */}
       {year && (
-        <>
-          <h4>Select Subject</h4>
-          <ul>
+        <div className="mb-8">
+          <h2 className="text-lg font-semibold mb-3">Select Subject</h2>
+          <div className="flex flex-wrap gap-3">
             {uniqueSubjects.map((sub) => (
-              <li key={sub}>
-                <button onClick={() => navigate(`/materials/${year}/${sub}`)}>
-                  {sub}
-                </button>
-              </li>
+              <button
+                key={sub}
+                onClick={() => navigate(`/materials/${year}/${sub}`)}
+                className={`px-4 py-2 rounded-full border ${
+                  subject === sub
+                    ? "bg-blue-600 text-white"
+                    : "bg-white hover:bg-gray-100"
+                }`}
+              >
+                {sub}
+              </button>
             ))}
-          </ul>
-        </>
+          </div>
+        </div>
       )}
 
-      <button onClick={() => navigate(`/materials/${year}`)}>Reset</button>
-
-      {year && <h4>Year: {year}</h4>}
-      {subject && <h4>Subject: {subject}</h4>}
-
-      {materials.map((item) => (
-        <div key={item._id}>
-          <h3>{item.title}</h3>
-          <p>
-            {item.subject} - {item.year}
-          </p>
-          <a href={item.link} target="_blank" rel="noreferrer">
-            Open
-          </a>
+      {/* Selected Info */}
+      {(year || subject) && (
+        <div className="mb-6 text-gray-600">
+          {year && <span className="mr-4">Year: {year}</span>}
+          {subject && <span>Subject: {subject}</span>}
         </div>
-      ))}
-    </div>
+      )}
+
+      {/* Loading State */}
+      {loading && (
+        <div className="text-center py-10 text-gray-500">
+          Loading materials...
+        </div>
+      )}
+
+      {/* Error State */}
+      {error && <div className="text-center py-10 text-red-500">{error}</div>}
+
+      {/* Empty State */}
+      {!loading && !error && materials.length === 0 && (
+        <div className="text-center py-10 text-gray-500">
+          No materials found.
+        </div>
+      )}
+
+      {/* Materials Grid */}
+      {!loading && !error && materials.length > 0 && (
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {materials.map((item) => (
+            <div
+              key={item._id}
+              className="bg-white rounded-lg shadow p-5 flex flex-col justify-between"
+            >
+              <div>
+                <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
+                <p className="text-sm text-gray-600">
+                  {item.subject} · {item.year}
+                </p>
+              </div>
+
+              <a
+                href={item.link}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-4 text-center bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+              >
+                Open Material
+              </a>
+            </div>
+          ))}
+        </div>
+      )}
+    </PageWrapper>
   );
 };
 

@@ -1,4 +1,12 @@
-body {
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.nav-link {
+  @apply text-gray-700 hover:text-blue-600 transition;
+}
+
+/* body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -10,4 +18,121 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+} */
+
+/* Reset */
+
+/* * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+} */
+
+/* Layout */
+/* body {
+  background-color: #f9fafb;
+  color: #333;
 }
+
+.container {
+  max-width: 900px;
+  margin: 10px;
+  padding: 20px;
+} */
+
+/* Navbar */
+/* nav {
+  background: white;
+  padding: 12px 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+nav a {
+  margin-right: 15px;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+nav a:hover {
+  color: #007bff;
+}
+
+nav button {
+  padding: 6px 12px;
+  cursor: pointer;
+} */
+
+/* Forms */
+/* form {
+  background: white;
+  padding: 20px;
+  border-radius: 6px;
+  margin-top: 20px;
+}
+
+form input,
+form select {
+  width: 100%;
+  padding: 8px;
+  margin: 10px 0;
+}
+
+button {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 4px;
+}
+
+button:hover {
+  background: #0056b3;
+} */
+
+/* Cards */
+/* .card {
+  background: white;
+  padding: 15px;
+  margin: 15px 0;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+} */
+
+/* Admin delete button */
+/* .delete-btn {
+  background: #dc3545;
+  margin-top: 10px;
+}
+
+.delete-btn:hover {
+  background: #a71d2a;
+}
+
+h1 {
+  margin-right: 10px;
+}
+
+.navbar-brand {
+  height: 70px;
+  width: auto;
+}
+
+.home-content {
+  font-size: xx-large;
+  display: flex;
+  background: white;
+  padding: 15px;
+  margin: 15px 0;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+ol,
+ul {
+  margin-left: 20px;
+}
+
+li {
+  margin: 6px 0;
+} */
