@@ -9,6 +9,7 @@ const Materials = () => {
   const [materials, setMaterials] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,6 +30,12 @@ const Materials = () => {
   }, [year, subject]);
 
   const uniqueSubjects = [...new Set(materials.map((m) => m.subject))];
+
+  const filteredMaterials = materials.filter(
+    (item) =>
+      item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.subject.toLowerCase().includes(searchTerm.toLowerCase()),
+  );
 
   return (
     <PageWrapper>
@@ -62,6 +69,17 @@ const Materials = () => {
             Reset
           </button>
         )}
+      </div>
+
+      {/* Search Bar */}
+      <div className="mb-6">
+        <input
+          type="text"
+          placeholder="Search by title or subject..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="w-full md:w-1/2 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
       </div>
 
       {/* Subject Filter */}
@@ -105,16 +123,16 @@ const Materials = () => {
       {error && <div className="text-center py-10 text-red-500">{error}</div>}
 
       {/* Empty State */}
-      {!loading && !error && materials.length === 0 && (
+      {!loading && !error && filteredMaterials.length === 0 && (
         <div className="text-center py-10 text-gray-500">
           No materials found.
         </div>
       )}
 
       {/* Materials Grid */}
-      {!loading && !error && materials.length > 0 && (
+      {!loading && !error && filteredMaterials.length > 0 && (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {materials.map((item) => (
+          {filteredMaterials.map((item) => (
             <div
               key={item._id}
               className="bg-white rounded-lg shadow p-5 flex flex-col justify-between"
