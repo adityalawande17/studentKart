@@ -1,4 +1,5 @@
-const BASE_URL = "http://localhost:5000";
+//const BASE_URL = "http://localhost:5000";
+const BASE_URL = "https://studentkart.onrender.com";
 
 export const getMaterials = async (year, subject, category) => {
   let url = `${BASE_URL}/materials`;
