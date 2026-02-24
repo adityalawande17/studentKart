@@ -1,5 +1,10 @@
 import { useState, useEffect } from "react";
-import { addMaterial, deleteMaterial, getMaterials } from "../services/api.js";
+import {
+  addMaterial,
+  deleteMaterial,
+  getMaterials,
+  updateMaterial,
+} from "../services/api.js";
 import { useNavigate } from "react-router-dom";
 import PageWrapper from "../components/PageWrapper.jsx";
 
@@ -16,6 +21,7 @@ const Admin = () => {
   const [message, setMessage] = useState(null);
   const [error, setError] = useState(null);
   const [materials, setMaterials] = useState([]);
+  const [editId, setEditId] = useState(null);
 
   useEffect(() => {
     getMaterials().then(setMaterials);
@@ -33,21 +39,26 @@ const Admin = () => {
       setError(null);
       setMessage(null);
 
-      const res = await addMaterial(form);
+      let res;
 
-      if (res._id) {
-        setMaterials([res, ...materials]);
-        setForm({
-          title: "",
-          year: "SE",
-          subject: "",
-          category: "college",
-          link: "",
-        });
-        setMessage("Material added successfully!");
+      if (editId) {
+        res = await updateMaterial(editId, form);
+        setMaterials(materials.map((m) => (m._id === editId ? res : m)));
+        setMessage("Material updated successfully!");
+        setEditId(null);
       } else {
-        setError(res.message || "Error adding material.");
+        res = await addMaterial(form);
+        setMaterials([res, ...materials]);
+        setMessage("Material added successfully!");
       }
+
+      setForm({
+        title: "",
+        year: "SE",
+        subject: "",
+        category: "college",
+        link: "",
+      });
     } catch (err) {
       setError("Something went wrong.");
     } finally {
@@ -90,7 +101,7 @@ const Admin = () => {
       )}
 
       {/* Add Material Form */}
-      <div className="bg-white rounded-lg shadow p-6 mb-10">
+      <div className="bg-white shadow p-6 mb-10">
         <h2 className="text-xl font-semibold mb-4">Add New Material</h2>
 
         <form onSubmit={handleSubmit} className="grid gap-4 sm:grid-cols-2">
@@ -147,13 +158,21 @@ const Admin = () => {
           <button
             type="submit"
             disabled={loading}
-            className={`sm:col-span-2 py-2 rounded text-white ${
+            className={`sm:col-span-2 py-2 rounded-3xl text-white ${
               loading
                 ? "bg-gray-400 cursor-not-allowed"
-                : "bg-blue-600 hover:bg-blue-700"
+                : editId
+                  ? "bg-yellow-500 hover:bg-yellow-600"
+                  : "bg-blue-600 hover:bg-blue-700"
             }`}
           >
-            {loading ? "Adding..." : "Add Material"}
+            {loading
+              ? editId
+                ? "Updating..."
+                : "Adding..."
+              : editId
+                ? "Update Material"
+                : "Add Material"}
           </button>
         </form>
       </div>
@@ -165,7 +184,7 @@ const Admin = () => {
         {materials.map((item) => (
           <div
             key={item._id}
-            className="bg-white rounded-lg shadow p-4 flex justify-between items-center"
+            className="bg-white shadow p-4 flex justify-between items-center"
           >
             <div>
               <p className="font-semibold">{item.title}</p>
@@ -174,17 +193,35 @@ const Admin = () => {
               </p>
             </div>
 
-            <button
-              onClick={() => handleDelete(item._id)}
-              disabled={deleteLoadingId === item._id}
-              className={`px-4 py-2 rounded text-white ${
-                deleteLoadingId === item._id
-                  ? "bg-gray-400 cursor-not-allowed"
-                  : "bg-red-500 hover:bg-red-600"
-              }`}
-            >
-              {deleteLoadingId === item._id ? "Deleting..." : "Delete"}
-            </button>
+            <div className="flex gap-3">
+              <button
+                onClick={() => {
+                  setForm({
+                    title: item.title,
+                    year: item.year,
+                    subject: item.subject,
+                    category: item.category,
+                    link: item.link,
+                  });
+                  setEditId(item._id);
+                }}
+                className="px-4 py-2 bg-yellow-500 text-white rounded-3xl hover:bg-yellow-600"
+              >
+                Edit
+              </button>
+
+              <button
+                onClick={() => handleDelete(item._id)}
+                disabled={deleteLoadingId === item._id}
+                className={`px-4 py-2 rounded-3xl text-white ${
+                  deleteLoadingId === item._id
+                    ? "bg-gray-400 cursor-not-allowed"
+                    : "bg-red-500 hover:bg-red-600"
+                }`}
+              >
+                {deleteLoadingId === item._id ? "Deleting..." : "Delete"}
+              </button>
+            </div>
           </div>
         ))}
       </div>
