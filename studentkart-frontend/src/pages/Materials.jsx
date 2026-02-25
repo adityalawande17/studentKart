@@ -93,7 +93,7 @@ const Materials = () => {
                 onClick={() => navigate(`/materials/${year}/${sub}`)}
                 className={`px-4 py-2 rounded-full border ${
                   subject === sub
-                    ? "bg-blue-600 text-white"
+                    ? "bg-blue-400 text-white"
                     : "bg-white hover:bg-gray-100"
                 }`}
               >
@@ -135,7 +135,7 @@ const Materials = () => {
           {filteredMaterials.map((item) => (
             <div
               key={item._id}
-              className="bg-white rounded-lg shadow p-5 flex flex-col justify-between"
+              className="bg-white rounded-3xl shadow p-5 flex flex-col justify-between"
             >
               <div>
                 <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
@@ -148,7 +148,7 @@ const Materials = () => {
                 href={item.link}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-4 text-center bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+                className="mt-4 text-center bg-blue-400 text-white py-2 rounded-3xl hover:bg-blue-600"
               >
                 Open Material
               </a>

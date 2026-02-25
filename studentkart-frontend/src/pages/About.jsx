@@ -4,7 +4,7 @@ const About = () => {
   return (
     <PageWrapper>
       <div className="max-w-3xl mx-auto bg-white rounded-lg shadow p-8">
-        <h1 className="text-3xl font-bold mb-4 text-blue-600">
+        <h1 className="text-3xl font-bold mb-4 text-blue-400">
           About StudentKart
         </h1>
 

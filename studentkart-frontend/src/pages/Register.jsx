@@ -30,7 +30,7 @@ const Register = () => {
 
   return (
     <PageWrapper>
-      <div className="max-w-md mx-auto bg-white rounded-lg shadow p-8">
+      <div className="max-w-md mx-auto bg-white rounded-3xl shadow p-8">
         <h2 className="text-2xl font-bold mb-4 text-center text-blue-300">
           Register
         </h2>
@@ -61,7 +61,7 @@ const Register = () => {
             className="w-full border px-3 py-2 rounded"
           />
 
-          <button className="w-full border-2 bg-blue-300 border-black text-black py-2 rounded-3xl hover:bg-blue-400 transition">
+          <button className="w-full border-2 bg-blue-300 text-white py-2 rounded-3xl hover:bg-blue-400 transition">
             Register
           </button>
         </form>

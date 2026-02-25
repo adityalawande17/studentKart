@@ -8,7 +8,7 @@ const Home = () => {
     <PageWrapper>
       {/* Hero Section */}
       <div className="bg-white rounded-lg shadow p-8 mb-10">
-        <h1 className="text-4xl font-bold mb-4 text-blue-600">StudentKart</h1>
+        <h1 className="text-4xl font-bold mb-4 text-blue-400">StudentKart</h1>
 
         <p className="text-lg text-gray-700 mb-6">
           Your one-stop platform for college materials, interview preparation,
@@ -18,7 +18,7 @@ const Home = () => {
         <div className="flex gap-4">
           <button
             onClick={() => navigate("/materials")}
-            className="px-6 py-3 bg-blue-600 text-white rounded hover:bg-blue-700"
+            className="px-6 py-3 bg-blue-400 text-white rounded hover:bg-blue-300"
           >
             Browse Materials
           </button>
