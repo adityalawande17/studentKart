@@ -16,6 +16,10 @@ const materialSchema = new mongoose.Schema(
       required: true,
       type: String,
     },
+    unit: {
+      type: String,
+      required: true,
+    },
     category: {
       required: true,
       enum: ["college", "interview", "roadmap"],

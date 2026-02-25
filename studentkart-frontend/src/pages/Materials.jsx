@@ -32,10 +32,33 @@ const Materials = () => {
   const uniqueSubjects = [...new Set(materials.map((m) => m.subject))];
 
   const filteredMaterials = materials.filter(
-    (item) =>
-      item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.subject.toLowerCase().includes(searchTerm.toLowerCase()),
+    (material) =>
+      material.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      material.subject.toLowerCase().includes(searchTerm.toLowerCase()),
   );
+
+  const groupedBySubject = filteredMaterials.reduce((acc, material) => {
+    if (!acc[material.subject]) {
+      acc[material.subject] = {};
+    }
+
+    if (!acc[material.subject][material.unit]) {
+      acc[material.subject][material.unit] = [];
+    }
+
+    acc[material.subject][material.unit].push(material);
+
+    return acc;
+  }, {});
+
+  const [openUnit, setOpenUnit] = useState(null);
+  const [openSubject, setOpenSubject] = useState(null);
+
+  useEffect(() => {
+    if (searchTerm) {
+      setOpenSubject("ALL");
+    }
+  }, [searchTerm]);
 
   return (
     <PageWrapper>
@@ -130,32 +153,61 @@ const Materials = () => {
       )}
 
       {/* Materials Grid */}
-      {!loading && !error && filteredMaterials.length > 0 && (
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {filteredMaterials.map((item) => (
-            <div
-              key={item._id}
-              className="bg-white rounded-3xl shadow p-5 flex flex-col justify-between"
-            >
-              <div>
-                <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-                <p className="text-sm text-gray-600">
-                  {item.subject} · {item.year}
-                </p>
-              </div>
+      {Object.keys(groupedBySubject).map((subject) => (
+        <div key={subject} className="mb-6 border rounded-lg bg-white shadow">
+          {/* SUBJECT HEADER */}
+          <button
+            onClick={() =>
+              setOpenSubject(openSubject === subject ? null : subject)
+            }
+            className="w-full text-left px-6 py-4 text-xl font-bold flex justify-between"
+          >
+            {subject}
+            <span>{openSubject === subject ? "▲" : "▼"}</span>
+          </button>
 
-              <a
-                href={item.link}
-                target="_blank"
-                rel="noreferrer"
-                className="mt-4 text-center bg-blue-400 text-white py-2 rounded-3xl hover:bg-blue-600"
-              >
-                Open Material
-              </a>
+          {/* IF SUBJECT OPEN */}
+          {openSubject === subject && (
+            <div className="p-6 border-t">
+              {Object.keys(groupedBySubject[subject]).map((unit) => (
+                <div key={unit} className="mb-4">
+                  {/* UNIT HEADER */}
+                  <button
+                    onClick={() => setOpenUnit(openUnit === unit ? null : unit)}
+                    className="w-full text-left px-4 py-2 font-semibold bg-gray-100 rounded flex justify-between"
+                  >
+                    {unit}
+                    <span>{openUnit === unit ? "▲" : "▼"}</span>
+                  </button>
+
+                  {/* IF UNIT OPEN */}
+                  {openUnit === unit && (
+                    <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                      {groupedBySubject[subject][unit].map((item) => (
+                        <div
+                          key={item._id}
+                          className="bg-gray-50 p-4 rounded shadow"
+                        >
+                          <h3 className="font-semibold mb-2">{item.title}</h3>
+
+                          <a
+                            href={item.link}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="block text-center bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+                          >
+                            Open Material
+                          </a>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
             </div>
-          ))}
+          )}
         </div>
-      )}
+      ))}
     </PageWrapper>
   );
 };

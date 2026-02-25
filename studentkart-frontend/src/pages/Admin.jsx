@@ -12,6 +12,7 @@ const Admin = () => {
     title: "",
     year: "SE",
     subject: "",
+    unit: "Unit 1",
     category: "college",
     link: "",
   });
@@ -143,6 +144,21 @@ const Admin = () => {
             <option value="college">College</option>
             <option value="interview">Interview</option>
             <option value="roadmap">Roadmap</option>
+          </select>
+
+          <select
+            name="unit"
+            value={form.unit}
+            onChange={handleChange}
+            className="w-full border px-3 py-2 rounded"
+          >
+            <option value="Unit 1">Unit 1</option>
+            <option value="Unit 2">Unit 2</option>
+            <option value="Unit 3">Unit 3</option>
+            <option value="Unit 4">Unit 4</option>
+            <option value="Unit 5">Unit 5</option>
+            <option value="Unit 6">Unit 6</option>
+            <option value="Extra">Extra Material</option>
           </select>
 
           <input
