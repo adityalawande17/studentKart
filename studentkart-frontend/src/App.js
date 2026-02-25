@@ -9,12 +9,14 @@ import Navbar from "./components/Navbar.jsx";
 import Interview from "./pages/Interview.jsx";
 import Roadmaps from "./pages/Roadmaps.jsx";
 import About from "./pages/About.jsx";
+import Register from "./pages/Register.jsx";
 
 function App() {
   return (
     <BrowserRouter>
       <Navbar />
       <Routes>
+        <Route path="/register" element={<Register />} />
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route

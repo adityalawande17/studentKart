@@ -24,8 +24,8 @@ const Login = () => {
   return (
     <PageWrapper>
       <div className="max-w-md mx-auto bg-white rounded-lg shadow p-8">
-        <h1 className="text-2xl font-bold mb-6 text-center text-blue-600">
-          Login to StudentKart
+        <h1 className="text-2xl font-bold mb-6 text-center text-blue-300">
+          Login
         </h1>
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -49,7 +49,7 @@ const Login = () => {
 
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+            className="w-full border-2 bg-blue-300 border-black text-black py-2 rounded-3xl hover:bg-blue-400 transition"
           >
             Login
           </button>

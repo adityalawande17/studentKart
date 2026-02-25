@@ -108,12 +108,20 @@ const Navbar = () => {
           {/* Right: Auth */}
           <div className="flex items-center gap-4">
             {!token ? (
-              <Link
-                to="/login"
-                className="px-4 py-1.5 rounded-3xl bg-blue-700 text-white hover:bg-blue-500"
-              >
-                Login
-              </Link>
+              <>
+                <Link
+                  to="/login"
+                  className="px-4 py-1.5 rounded-3xl bg-blue-200 border-2 border-black text-black hover:bg-blue-300"
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/register"
+                  className="px-4 py-1.5 rounded-3xl bg-blue-200 border-2 border-black text-black hover:bg-blue-300"
+                >
+                  Register
+                </Link>
+              </>
             ) : (
               <button
                 onClick={handleLogout}
