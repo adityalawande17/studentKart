@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getMaterials } from "../services/api.js";
 import PageWrapper from "../components/PageWrapper.jsx";
+import { getBookmarks, removeBookmark, addBookmark } from "../services/api.js";
 
 const Materials = () => {
   const { year, subject } = useParams();
@@ -53,6 +54,35 @@ const Materials = () => {
 
   const [openUnit, setOpenUnit] = useState(null);
   const [openSubject, setOpenSubject] = useState(null);
+  const [bookmarks, setBookmarks] = useState([]);
+
+  useEffect(() => {
+    const fetchBookmarks = async () => {
+      try {
+        const data = await getBookmarks();
+        setBookmarks(data.map((b) => b._id));
+      } catch (err) {
+        console.log("Not logged in");
+      }
+    };
+
+    fetchBookmarks();
+  }, []);
+
+  const handleBookmark = async (materialId) => {
+    if (!localStorage.getItem("token")) {
+      alert("Login first");
+      return;
+    }
+
+    if (bookmarks.includes(materialId)) {
+      await removeBookmark(materialId);
+      setBookmarks(bookmarks.filter((id) => id !== materialId));
+    } else {
+      await addBookmark(materialId);
+      setBookmarks([...bookmarks, materialId]);
+    }
+  };
 
   useEffect(() => {
     if (searchTerm) {
@@ -189,7 +219,18 @@ const Materials = () => {
                           className="bg-gray-50 p-4 rounded shadow"
                         >
                           <h3 className="font-semibold mb-2">{item.title}</h3>
-
+                          <button
+                            onClick={() => handleBookmark(item._id)}
+                            className={`mt-2 text-sm ${
+                              bookmarks.includes(item._id)
+                                ? "text-red-600"
+                                : "text-gray-500"
+                            }`}
+                          >
+                            {bookmarks.includes(item._id)
+                              ? "❤️ Saved"
+                              : "🤍 Save"}
+                          </button>
                           <a
                             href={item.link}
                             target="_blank"

@@ -123,12 +123,16 @@ const Navbar = () => {
                 </Link>
               </>
             ) : (
-              <button
-                onClick={handleLogout}
-                className="px-4 py-1.5 rounded-3xl bg-red-600 text-white hover:bg-red-500"
-              >
-                Logout
-              </button>
+              <>
+                <button
+                  onClick={handleLogout}
+                  className="px-4 py-1.5 rounded-3xl bg-red-600 text-white hover:bg-red-500"
+                >
+                  Logout
+                </button>
+
+                <Link to="/profile">Profile</Link>
+              </>
             )}
           </div>
         </div>

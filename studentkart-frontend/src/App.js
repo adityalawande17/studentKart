@@ -10,6 +10,7 @@ import Interview from "./pages/Interview.jsx";
 import Roadmaps from "./pages/Roadmaps.jsx";
 import About from "./pages/About.jsx";
 import Register from "./pages/Register.jsx";
+import Profile from "./pages/Profile.jsx";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Route path="/interview" element={<Interview />} />
         <Route path="/roadmaps" element={<Roadmaps />} />
         <Route path="/about" element={<About />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </BrowserRouter>
   );

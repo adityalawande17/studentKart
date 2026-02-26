@@ -21,6 +21,12 @@ const userSchema = new mongoose.Schema(
       unique: true,
       lowercase: true,
     },
+    bookmarks: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Material",
+      },
+    ],
   },
   { timestamps: true },
 );

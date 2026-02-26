@@ -76,3 +76,38 @@ export const updateMaterial = async (id, updatedData) => {
 
   return res.json();
 };
+
+// Add bookmark
+export const addBookmark = async (materialId) => {
+  const res = await fetch(`${BASE_URL}/users/bookmark/${materialId}`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
+
+  return res.json();
+};
+
+// Remove bookmark
+export const removeBookmark = async (materialId) => {
+  const res = await fetch(`${BASE_URL}/users/bookmark/${materialId}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
+
+  return res.json();
+};
+
+// Get bookmarks
+export const getBookmarks = async () => {
+  const res = await fetch(`${BASE_URL}/users/bookmarks`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
+
+  return res.json();
+};
