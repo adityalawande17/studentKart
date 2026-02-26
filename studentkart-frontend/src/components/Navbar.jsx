@@ -73,7 +73,7 @@ const Navbar = () => {
           {/* Left: Logo */}
           <div className="flex items-center gap-3">
             <img
-              src="/mainlogo.png"
+              src="/studentkart-new-logo.png"
               alt="Studentkart Logo"
               className="h-10 cursor-pointer hover:scale-105 transition-transform"
               onClick={() => navigate("/")}
