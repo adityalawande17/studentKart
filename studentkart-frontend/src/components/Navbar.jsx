@@ -111,13 +111,13 @@ const Navbar = () => {
               <>
                 <Link
                   to="/login"
-                  className="px-4 py-1.5 rounded-3xl bg-blue-300 border-2 text-white hover:bg-blue-200"
+                  className="px-4 py-1.5 rounded-3xl bg-blue-300 border-2 text-white hover:bg-blue-400"
                 >
                   Login
                 </Link>
                 <Link
                   to="/register"
-                  className="px-4 py-1.5 rounded-3xl bg-blue-300 border-2  text-white hover:bg-blue-200"
+                  className="px-4 py-1.5 rounded-3xl bg-blue-300 border-2  text-white hover:bg-blue-400"
                 >
                   Register
                 </Link>
