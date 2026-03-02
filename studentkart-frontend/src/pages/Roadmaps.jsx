@@ -159,7 +159,7 @@ const Roadmaps = () => {
               </div>
 
               {/* PROGRESS BAR */}
-              <div className="px-6">
+              <div className="px-6 p-2">
                 <div className="w-full bg-gray-200 h-2 rounded-full">
                   <div
                     className="bg-blue-500 h-2 rounded-full transition-all duration-500"
