@@ -155,13 +155,20 @@ const Home = () => {
       </div>
 
       {/* SECONDARY BANNER */}
-      <div className=" bg-blue-500 rounded-2xl p-12 text-center text-white shadow-lg mb-16">
-        <h2 className="text-3xl font-bold mb-4">
-          Learn Smarter. Prepare Better. Achieve More.
-        </h2>
-        <p className="mb-6 text-lg">
-          Join thousands of students who trust StudentKart for academic success.
-        </p>
+      <div className="relative h-[30vh] rounded-2xl overflow-hidden mb-16 shadow-lg blur-10">
+        <img
+          src="https://images.unsplash.com/photo-1610116306796-6fea9f4fae38?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          alt="Books"
+        />
+        <div className="absolute inset-0 bg-black/30 flex flex-col justify-center items-center text-center px-6">
+          <h2 className="text-blue-300 text-3xl font-bold mb-4">
+            Learn Smarter. Prepare Better. Achieve More.
+          </h2>
+          <p className="mb-6 text-lg text-white">
+            Join thousands of students who trust StudentKart for academic
+            success.
+          </p>
+        </div>
 
         <button
           onClick={() => navigate("/register")}
