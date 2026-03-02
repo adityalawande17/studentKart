@@ -90,7 +90,7 @@ const Home = () => {
               onClick={() => navigate("/materials")}
               className="px-8 py-3 bg-blue-400 text-white rounded-3xl text-lg hover:bg-blue-500 transition"
             >
-              Explore Materials
+              Explore Academics
             </button>
 
             <button

@@ -99,14 +99,25 @@ const Interview = () => {
   return (
     <PageWrapper>
       {/* HERO SECTION */}
-      <div className="bg-blue-300  text-white rounded-2xl p-10 mb-12 shadow-lg">
-        <h1 className="text-4xl font-bold mb-4">
-          Crack Your Placement Interviews
-        </h1>
-        <p className="text-lg max-w-2xl">
-          Structured resources for DSA, Core CS subjects, and complete placement
-          preparation — all in one place.
-        </p>
+      <div className="relative overflow-hidden mb-12 shadow-lg">
+        {/* Background Image */}
+        <img
+          src="https://images.unsplash.com/photo-1555066931-4365d14bab8c"
+          alt="Students preparing"
+          className="w-full h-[300px] object-cover"
+        />
+
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-black/60 flex flex-col justify-center p-10">
+          <h1 className="text-4xl font-bold mb-4 text-white">
+            Crack Your Placement Interviews
+          </h1>
+
+          <p className="text-lg max-w-2xl text-gray-200">
+            Structured resources for DSA, Core CS subjects, and complete
+            placement preparation — all in one place.
+          </p>
+        </div>
       </div>
 
       {/* CATEGORY FILTER */}

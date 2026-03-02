@@ -93,7 +93,28 @@ const Materials = () => {
   return (
     <PageWrapper>
       {/* Page Title */}
-      <h1 className="text-3xl font-bold mb-6">College Materials</h1>
+      {/* <h1 className="text-3xl font-bold mb-6">College Materials</h1> */}
+
+      {/* HERO SECTION */}
+      <div className="relative overflow-hidden mb-12 shadow-lg">
+        {/* Background Image */}
+        <img
+          src="https://plus.unsplash.com/premium_photo-1682974406908-66032d609d94?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjF8fGFjYWRlbWljfGVufDB8fDB8fHww"
+          alt="Students preparing"
+          className="w-full h-[300px] object-cover"
+        />
+
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-black/60 flex flex-col justify-center p-10">
+          <h1 className="text-4xl font-bold mb-4 text-white">
+            Score That 9+ CGPA This Semester
+          </h1>
+
+          <p className="text-lg max-w-2xl text-gray-200">
+            Cause we have everything you'll ever need.
+          </p>
+        </div>
+      </div>
 
       {/* Year Filter */}
       <div className="flex flex-wrap items-center gap-4 mb-6">

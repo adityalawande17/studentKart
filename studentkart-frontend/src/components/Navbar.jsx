@@ -69,7 +69,7 @@ const Navbar = () => {
   return (
     <nav className="bg-white shadow">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-20">
           {/* Left: Logo */}
           <div className="flex items-center gap-3">
             <img
@@ -86,7 +86,7 @@ const Navbar = () => {
               Home
             </Link>
             <Link className="nav-link" to="/materials">
-              Materials
+              Academics
             </Link>
             <Link className="nav-link" to="/interview">
               Interview
@@ -111,13 +111,13 @@ const Navbar = () => {
               <>
                 <Link
                   to="/login"
-                  className="px-4 py-1.5 rounded-3xl bg-blue-200 border-2 text-white hover:bg-blue-300"
+                  className="px-4 py-1.5 rounded-3xl bg-blue-300 border-2 text-white hover:bg-blue-200"
                 >
                   Login
                 </Link>
                 <Link
                   to="/register"
-                  className="px-4 py-1.5 rounded-3xl bg-blue-200 border-2  text-white hover:bg-blue-300"
+                  className="px-4 py-1.5 rounded-3xl bg-blue-300 border-2  text-white hover:bg-blue-200"
                 >
                   Register
                 </Link>

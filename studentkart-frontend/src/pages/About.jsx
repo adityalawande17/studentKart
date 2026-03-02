@@ -11,8 +11,8 @@ const About = () => {
         <p className="text-gray-700 mb-6 leading-relaxed">
           Hello! I’m <span className="font-semibold">Aditya</span>, a 3rd year
           Computer Science undergraduate. StudentKart was built to help CSE
-          students access organized college materials, interview preparation
-          resources, and clear learning roadmaps—all in one place.
+          students access organized college academics material, interview
+          preparation resources, and clear learning roadmaps—all in one place.
         </p>
 
         <p className="text-gray-700 mb-8 leading-relaxed">
