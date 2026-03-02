@@ -88,14 +88,14 @@ const Home = () => {
           <div className="flex gap-6">
             <button
               onClick={() => navigate("/materials")}
-              className="px-8 py-3 bg-blue-500 text-white rounded-lg text-lg hover:bg-blue-600 transition"
+              className="px-8 py-3 bg-blue-400 text-white rounded-3xl text-lg hover:bg-blue-500 transition"
             >
               Explore Materials
             </button>
 
             <button
               onClick={() => navigate("/interview")}
-              className="px-8 py-3 border border-white text-white rounded-lg text-lg hover:bg-white hover:text-black transition"
+              className="px-8 py-3 border border-white text-white rounded-3xl text-lg hover:bg-white hover:text-black transition"
             >
               Start Preparing
             </button>
@@ -143,7 +143,7 @@ const Home = () => {
           </p>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-lg p-8 hover:scale-105 transition">
+        <div className="bg-white rounded-3xl shadow-lg p-8 hover:scale-105 transition">
           <h3 className="text-xl font-semibold mb-4 text-blue-500">
             Structured Roadmaps
           </h3>
@@ -155,27 +155,26 @@ const Home = () => {
       </div>
 
       {/* SECONDARY BANNER */}
-      <div className="relative h-[30vh] rounded-2xl overflow-hidden mb-16 shadow-lg blur-10">
+      <div className="relative h-[30vh] rounded-3xl overflow-hidden mb-16 shadow-lg blur-10">
         <img
           src="https://images.unsplash.com/photo-1610116306796-6fea9f4fae38?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           alt="Books"
         />
         <div className="absolute inset-0 bg-black/30 flex flex-col justify-center items-center text-center px-6">
-          <h2 className="text-blue-300 text-3xl font-bold mb-4">
+          <h2 className="text-white text-3xl font-bold mb-4">
             Learn Smarter. Prepare Better. Achieve More.
           </h2>
           <p className="mb-6 text-lg text-white">
             Join thousands of students who trust StudentKart for academic
             success.
           </p>
+          <button
+            onClick={() => navigate("/register")}
+            className="px-8 py-3 border border-white text-white rounded-3xl text-lg hover:bg-white hover:text-black transition"
+          >
+            Get Started
+          </button>
         </div>
-
-        <button
-          onClick={() => navigate("/register")}
-          className="px-8 py-3 bg-white text-blue-600 rounded-lg font-semibold hover:bg-gray-200 transition"
-        >
-          Get Started Now
-        </button>
       </div>
     </PageWrapper>
   );

@@ -3,7 +3,7 @@ import PageWrapper from "../components/PageWrapper";
 const About = () => {
   return (
     <PageWrapper>
-      <div className="max-w-3xl mx-auto bg-white rounded-lg shadow p-8">
+      <div className="max-w-3xl mx-auto bg-white rounded-3xl shadow p-8">
         <h1 className="text-3xl font-bold mb-4 text-blue-400">
           About StudentKart
         </h1>
@@ -27,7 +27,7 @@ const About = () => {
             href="https://github.com/adityalawande17"
             target="_blank"
             rel="noreferrer"
-            className="px-6 py-3 bg-gray-900 text-white rounded hover:bg-gray-800"
+            className="px-6 py-3 bg-gray-900 text-white rounded-3xl hover:bg-gray-800"
           >
             Visit my GitHub
           </a>

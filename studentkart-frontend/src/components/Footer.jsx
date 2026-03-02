@@ -62,11 +62,6 @@ const Footer = () => {
           <h3 className="text-lg font-semibold text-white mb-4">Contact</h3>
           <p className="text-sm text-gray-400">Email: temp@studentkart.com</p>
           <p className="text-sm text-gray-400">Pune, Maharashtra</p>
-          <li className="list-none">
-            <Link to="/about" className="hover:text-white">
-              Github
-            </Link>
-          </li>
         </div>
       </div>
 
