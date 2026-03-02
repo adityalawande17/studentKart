@@ -11,6 +11,7 @@ import Roadmaps from "./pages/Roadmaps.jsx";
 import About from "./pages/About.jsx";
 import Register from "./pages/Register.jsx";
 import Profile from "./pages/Profile.jsx";
+import Footer from "./components/Footer.jsx";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }
