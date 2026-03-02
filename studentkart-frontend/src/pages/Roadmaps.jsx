@@ -53,7 +53,7 @@
 
 import PageWrapper from "../components/PageWrapper";
 import { useState, useEffect } from "react";
-import ChevronDown from "lucide-react/dist/esm/icons/chevron-down";
+import { ChevronDown } from "lucide-react";
 
 const roadmapsData = [
   {
