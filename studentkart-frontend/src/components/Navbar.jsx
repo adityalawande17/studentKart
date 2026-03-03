@@ -73,7 +73,7 @@ const Navbar = () => {
           {/* Left: Logo */}
           <div className="flex items-center gap-3">
             <img
-              src="/studentkart-new-logo.png"
+              src="/logo3.png"
               alt="Studentkart Logo"
               className="h-10 cursor-pointer hover:scale-105 transition-transform"
               onClick={() => navigate("/")}
@@ -111,13 +111,13 @@ const Navbar = () => {
               <>
                 <Link
                   to="/login"
-                  className="px-4 py-1.5 rounded-3xl bg-blue-300 border-2 text-white hover:bg-blue-400"
+                  className="px-4 py-1.5 rounded-3xl bg-blue-300 text-white hover:bg-blue-400"
                 >
                   Login
                 </Link>
                 <Link
                   to="/register"
-                  className="px-4 py-1.5 rounded-3xl bg-blue-300 border-2  text-white hover:bg-blue-400"
+                  className="px-4 py-1.5 rounded-3xl bg-blue-300  text-white hover:bg-blue-400"
                 >
                   Register
                 </Link>
